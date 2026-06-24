@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запрошення на весілля</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/invitation.js" defer></script>
+</head>
+<body>
+<main class="invitation">
+    <div class="petals" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <section class="cover is-closed" id="cover" aria-label="Відкрити запрошення">
+        <button class="cover-card" type="button" id="openInvitation">
+            <span class="cover-frame" aria-hidden="true"></span>
+            <span class="rings" aria-hidden="true"></span>
+            <span class="cover-small">The wedding of</span>
+            <span class="cover-names">
+                <span class="name-line">Олексій</span>
+                <span class="amp-line">&amp;</span>
+                <span class="name-line bride-name">Маргарита</span>
+            </span>
+            <span class="cover-date">15 серпня 2026</span>
+            <span class="cover-place">початок о 15:00</span>
+            <span class="cover-action">Торкніться, щоб відкрити</span>
+        </button>
+    </section>
+
+    <section class="screen intro" id="intro">
+        <div class="photo-frame placeholder-photo">
+            <span>Фото пари</span>
+        </div>
+        <p class="section-label">Wedding day</p>
+        <h1>Олексій &amp; Маргарита</h1>
+        <p class="wedding-date">15 серпня 2026</p>
+    </section>
+
+    <section class="screen story">
+        <p class="section-label">Запрошуємо</p>
+        <div class="text-block">
+            <p>Дорогі рідні та друзі!</p>
+            <p>У житті кожного трапляються миті, які хочеться розділити з найдорожчими людьми.</p>
+            <p>Для нас такою миттю стане день, коли дві долі поєднаються в одну, а любов стане початком нової родини.</p>
+            <p>Запрошуємо вас бути поруч і розділити з нами радість створення нашої сім’ї.</p>
+        </div>
+
+        <div class="calendar" aria-label="Календар серпня 2026">
+            <p>Серпень</p>
+            <div class="calendar-grid calendar-weekdays">
+                <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Нд</span>
+            </div>
+            <div class="calendar-grid">
+                <span></span><span></span><span></span><span></span><span></span><span>1</span><span>2</span>
+                <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span class="heart-mark">15</span><span>16</span>
+                <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                <span>31</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="screen program">
+        <p class="section-label">Програма дня</p>
+        <div class="timeline">
+            <article>
+                <time>14:30</time>
+                <div>
+                    <h2>Збір гостей</h2>
+                    <p>Зустрічаємось біля РАЦС.</p>
+                </div>
+            </article>
+            <article>
+                <time>15:00</time>
+                <div>
+                    <h2>Початок церемонії</h2>
+                    <p>РАЦС</p>
+                    <a class="map-link" href="https://maps.app.goo.gl/A94mpvWgtPYndCmUA?g_st=it" target="_blank" rel="noopener">Відкрити локацію</a>
+                </div>
+            </article>
+            <article>
+                <time>17:00</time>
+                <div>
+                    <h2>Святковий стіл</h2>
+                    <p>Чекаємо всіх на затишну вечерю.</p>
+                    <a class="map-link" href="https://maps.app.goo.gl/Z5cfLzjxAruTfq9T6?g_st=it" target="_blank" rel="noopener">Відкрити локацію</a>
+                </div>
+            </article>
+            <article>
+                <time>21:00</time>
+                <div>
+                    <h2>Святковий торт</h2>
+                    <p>Солодкий фінал вечора.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="screen dress-code">
+        <img src="/images/dress-code.png" alt="Приклад дрес-коду у бежевих та зелених кольорах">
+        <p class="dress-text">Ваш гарний настрій — найважливіше для нас. А якщо ваш образ ще й перегукуватиметься з кольорами нашого свята, буде просто чудово.</p>
+    </section>
+
+    <section class="screen rsvp" id="rsvp">
+        <p class="section-label">Анкета гостя</p>
+        <p class="form-note">Будь ласка, заповніть анкету, щоб ми могли спланувати свято з урахуванням ваших побажань.</p>
+
+        <p class="success" th:if="${sent}">Дякуємо! Вашу відповідь збережено.</p>
+        <p class="success form-success" hidden>Дякуємо! Вашу відповідь збережено.</p>
+
+        <form method="post" action="/rsvp">
+            <label>
+                Ваше ім’я та прізвище
+                <input name="fullName" type="text" placeholder="Іван Іванов" required>
+            </label>
+
+            <fieldset>
+                <legend>Чи будете ви на весіллі?</legend>
+                <label><input type="radio" name="attendance" value="Так, із задоволенням" required> Так, із задоволенням</label>
+                <label><input type="radio" name="attendance" value="На жаль, не зможу"> На жаль, не зможу</label>
+            </fieldset>
+
+            <label>
+                Якщо будете з парою, вкажіть її ім’я
+                <input name="partnerName" type="text" placeholder="Маргарита Іванова">
+            </label>
+
+            <fieldset>
+                <legend>Що обираєте з напоїв?</legend>
+                <label><input type="checkbox" name="drinks" value="Коктейлі"> Коктейлі</label>
+                <label><input type="checkbox" name="drinks" value="Безалкогольні напої"> Безалкогольні напої</label>
+                <label><input type="checkbox" name="drinks" value="Пиво"> Пиво</label>
+                <label><input type="checkbox" name="drinks" value="Вино"> Вино</label>
+                <label><input type="checkbox" name="drinks" value="Ігристе"> Ігристе</label>
+                <label><input type="checkbox" name="drinks" value="Текіла"> Текіла</label>
+                <label><input type="checkbox" name="drinks" value="Ром"> Ром</label>
+                <label><input type="checkbox" name="drinks" value="Коньяк"> Коньяк</label>
+            </fieldset>
+
+            <label>
+                Чи є у вас харчові алергії?
+                <input name="allergy" type="text" placeholder="Якщо так, вкажіть на що">
+            </label>
+
+            <fieldset>
+                <legend>Що обираєте на гаряче?</legend>
+                <label><input type="radio" name="meal" value="Риба"> Риба</label>
+                <label><input type="radio" name="meal" value="М’ясо"> М’ясо</label>
+                <label><input type="radio" name="meal" value="Птиця"> Птиця</label>
+            </fieldset>
+
+            <label>
+                Побажання щодо їжі та напоїв
+                <textarea name="wishes" rows="4"></textarea>
+            </label>
+
+            <button type="submit">Відправити</button>
+        </form>
+    </section>
+
+    <section class="screen countdown" id="countdown">
+        <div class="photo-frame placeholder-photo small">
+            <span>Фото пари</span>
+        </div>
+        <p class="section-label">До весілля залишилось</p>
+        <div class="countdown-grid" data-countdown="2026-08-15T15:00:00+03:00">
+            <div><strong data-days>0</strong><span>Днів</span></div>
+            <div><strong data-hours>0</strong><span>Годин</span></div>
+            <div><strong data-minutes>0</strong><span>Хвилин</span></div>
+            <div><strong data-seconds>0</strong><span>Секунд</span></div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

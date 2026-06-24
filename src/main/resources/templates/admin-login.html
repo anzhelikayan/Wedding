@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмінка RSVP</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<main class="login-page">
+    <form class="login-card" method="get" action="/admin">
+        <p class="eyebrow">Wedding RSVP</p>
+        <h1>Вхід для перегляду відповідей</h1>
+        <p class="error" th:if="${error}">Невірний пароль.</p>
+        <label>
+            Пароль
+            <input type="password" name="key" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Увійти</button>
+    </form>
+</main>
+</body>
+</html>

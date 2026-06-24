@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відповіді гостей</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<main class="admin-page">
+    <header class="admin-header">
+        <div>
+            <p class="eyebrow">Wedding RSVP</p>
+            <h1>Відповіді гостей</h1>
+        </div>
+        <nav>
+            <a href="/admin/responses.csv">CSV</a>
+            <a href="/admin/logout">Вийти</a>
+        </nav>
+    </header>
+
+    <section class="stats">
+        <article>
+            <span th:text="${total}">0</span>
+            <p>Всього відповідей</p>
+        </article>
+        <article>
+            <span th:text="${attending}">0</span>
+            <p>Будуть</p>
+        </article>
+        <article>
+            <span th:text="${notAttending}">0</span>
+            <p>Не зможуть</p>
+        </article>
+    </section>
+
+    <section class="empty" th:if="${#lists.isEmpty(responses)}">
+        <p>Поки немає відповідей.</p>
+    </section>
+
+    <section class="responses" th:if="${!#lists.isEmpty(responses)}">
+        <article class="response-card" th:each="response : ${responses}">
+            <div class="response-title">
+                <h2 th:text="${response.fullName}">Ім'я гостя</h2>
+                <time th:text="${#temporals.format(response.createdAt, 'dd.MM.yyyy HH:mm')}">Дата</time>
+            </div>
+            <dl>
+                <div>
+                    <dt>Присутність</dt>
+                    <dd th:text="${response.attendance ?: '-'}">-</dd>
+                </div>
+                <div>
+                    <dt>Пара</dt>
+                    <dd th:text="${response.partnerName ?: '-'}">-</dd>
+                </div>
+                <div>
+                    <dt>Напої</dt>
+                    <dd th:text="${response.drinks ?: '-'}">-</dd>
+                </div>
+                <div>
+                    <dt>Алергії</dt>
+                    <dd th:text="${response.allergy ?: '-'}">-</dd>
+                </div>
+                <div>
+                    <dt>Гаряче</dt>
+                    <dd th:text="${response.meal ?: '-'}">-</dd>
+                </div>
+                <div class="wide">
+                    <dt>Побажання</dt>
+                    <dd th:text="${response.wishes ?: '-'}">-</dd>
+                </div>
+            </dl>
+        </article>
+    </section>
+</main>
+</body>
+</html>
