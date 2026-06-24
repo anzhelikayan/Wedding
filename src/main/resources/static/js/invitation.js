@@ -1,13 +1,38 @@
 const openButton = document.querySelector("#openInvitation");
 const cover = document.querySelector("#cover");
+const petals = document.querySelector(".petals");
 
 if (openButton && cover) {
+    let openingStarted = false;
+
     openButton.addEventListener("click", () => {
+        if (openingStarted) {
+            return;
+        }
+
+        openingStarted = true;
         openButton.classList.add("opened");
         window.setTimeout(() => {
-            smoothScrollToElement(document.querySelector("#intro"), 760);
-        }, 120);
+            smoothScrollToElement(document.querySelector("#intro"), 520);
+        }, 70);
     });
+}
+
+if (petals) {
+    petals.textContent = "";
+
+    for (let i = 0; i < 22; i++) {
+        const petal = document.createElement("span");
+        petal.style.setProperty("--x", `${Math.random() * 104 - 2}%`);
+        petal.style.setProperty("--duration", `${7 + Math.random() * 9}s`);
+        petal.style.setProperty("--delay", `${Math.random() * -12}s`);
+        petal.style.setProperty("--drift-a", `${Math.random() * 90 - 45}px`);
+        petal.style.setProperty("--drift-b", `${Math.random() * 120 - 60}px`);
+        petal.style.setProperty("--scale", `${0.55 + Math.random() * 0.85}`);
+        petal.style.setProperty("--spin", `${220 + Math.random() * 540}deg`);
+        petal.style.setProperty("--opacity", `${0.28 + Math.random() * 0.42}`);
+        petals.appendChild(petal);
+    }
 }
 
 if (openButton) {

@@ -4,8 +4,11 @@
     --font-body: "Manrope", "Segoe UI", Arial, sans-serif;
     --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
     --font-script: "Marck Script", "Cormorant Garamond", Georgia, serif;
-    --cream: #f4eee4;
-    --paper: #fffaf2;
+    --page-bg: #fbf4e9;
+    --panel-bg: #fffaf0;
+    --overlay-bg: rgba(255, 250, 240, 0.9);
+    --cream: var(--page-bg);
+    --paper: var(--panel-bg);
     --sage: #8f9d7a;
     --olive: #586647;
     --moss: #2f3b2b;
@@ -29,8 +32,7 @@ body {
     font-family: var(--font-body);
     font-weight: 300;
     color: var(--ink);
-    background:
-        linear-gradient(90deg, #e4dbc9 0, #f7f1e8 11%, #fffaf2 50%, #f7f1e8 89%, #e4dbc9 100%);
+    background: var(--page-bg);
 }
 
 button,
@@ -43,7 +45,7 @@ textarea {
     max-width: 520px;
     margin: 0 auto;
     position: relative;
-    background: rgba(255, 250, 242, 0.94);
+    background: var(--page-bg);
     box-shadow: 0 0 70px rgba(46, 43, 37, 0.18);
     overflow: hidden;
 }
@@ -59,9 +61,7 @@ textarea {
     opacity: 0;
     transform: translateY(46px) scale(0.985);
     transition: opacity 1.05s ease, transform 1.05s cubic-bezier(.2,.8,.2,1);
-    background:
-        linear-gradient(180deg, rgba(255,250,242,.92), rgba(246,238,226,.92)),
-        radial-gradient(ellipse at 50% 0%, rgba(183,170,119,.18), transparent 55%);
+    background: var(--page-bg);
 }
 
 .screen.is-visible {
@@ -143,9 +143,7 @@ textarea {
     place-items: center;
     padding: 14px 8px;
     perspective: 1400px;
-    background:
-        radial-gradient(ellipse at top, rgba(255,255,255,.7), transparent 40%),
-        linear-gradient(180deg, #eee6d6, #faf5ea);
+    background: var(--page-bg);
 }
 
 .cover-card {
@@ -165,11 +163,11 @@ textarea {
     overflow: hidden;
     color: var(--moss);
     cursor: pointer;
-    background: #fffaf0;
+    background: var(--panel-bg);
     box-shadow: 0 28px 80px rgba(47, 59, 43, 0.22);
     transform: rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
     transform-origin: left center;
-    transition: transform 0.28s ease, opacity 0.34s ease, filter 0.34s ease;
+    transition: transform 0.32s cubic-bezier(.18,.82,.22,1), opacity 0.32s ease, box-shadow 0.32s ease;
     animation: cardArrival 1.15s cubic-bezier(.16,.84,.25,1) both;
 }
 
@@ -200,8 +198,8 @@ textarea {
 
 .cover-card.opened {
     opacity: 0;
-    filter: blur(3px);
-    transform: perspective(1100px) rotateY(-70deg) translateX(-22px) scale(.97);
+    box-shadow: 0 8px 32px rgba(47, 59, 43, 0.1);
+    transform: perspective(1100px) translateY(18px) scale(.92);
     pointer-events: none;
 }
 
@@ -318,7 +316,7 @@ textarea {
     place-items: center;
     border: 1px solid rgba(183, 170, 119, 0.48);
     background:
-        linear-gradient(rgba(255, 250, 242, 0.36), rgba(255, 250, 242, 0.72)),
+        linear-gradient(rgba(255, 250, 240, 0.36), rgba(255, 250, 240, 0.72)),
         linear-gradient(135deg, rgba(143, 157, 122, 0.34), rgba(213, 194, 165, 0.42));
     color: rgba(47, 59, 43, 0.62);
 }
@@ -361,7 +359,7 @@ h1 {
     width: min(100%, 430px);
     margin: 0 auto;
     padding: 40px 34px 36px;
-    background: rgba(255, 250, 242, 0.62);
+    background: var(--overlay-bg);
     border: 1px solid rgba(183, 170, 119, 0.28);
     box-shadow: 0 18px 46px rgba(47, 59, 43, 0.07);
     position: relative;
@@ -525,12 +523,12 @@ h1 {
     border-radius: 999px;
     color: var(--moss);
     text-decoration: none;
-    background: rgba(255, 250, 242, 0.62);
+    background: var(--overlay-bg);
 }
 
 .dress-code {
     text-align: center;
-    background: linear-gradient(180deg, #f8f1e7, #fff9ef);
+    background: var(--page-bg);
 }
 
 .dress-code::before {
@@ -587,7 +585,7 @@ h1 {
     display: grid;
     place-items: center;
     padding: 12px 6px;
-    background: rgba(255, 250, 242, 0.72);
+    background: var(--overlay-bg);
     border: 1px solid rgba(183, 170, 119, 0.28);
     box-shadow: 0 14px 30px rgba(47, 59, 43, 0.06);
     transform: translateY(14px);
@@ -751,17 +749,11 @@ form button:disabled {
 .petals span {
     top: -40px;
     left: var(--x);
-    opacity: .56;
+    opacity: var(--opacity);
+    transform: scale(var(--scale));
     animation: petalFall var(--duration) linear infinite;
     animation-delay: var(--delay);
 }
-
-.petals span:nth-child(1) { --x: 8%; --duration: 9s; --delay: 0s; }
-.petals span:nth-child(2) { --x: 24%; --duration: 12s; --delay: -5s; }
-.petals span:nth-child(3) { --x: 42%; --duration: 10s; --delay: -2s; }
-.petals span:nth-child(4) { --x: 63%; --duration: 13s; --delay: -7s; }
-.petals span:nth-child(5) { --x: 79%; --duration: 11s; --delay: -4s; }
-.petals span:nth-child(6) { --x: 92%; --duration: 14s; --delay: -9s; }
 
 .burst-petal {
     left: 50%;
@@ -819,13 +811,21 @@ form button:disabled {
 
 @keyframes petalFall {
     0% {
-        transform: translate3d(0, -60px, 0) rotate(0deg);
+        transform: translate3d(0, -70px, 0) rotate(0deg) scale(var(--scale));
+        opacity: 0;
     }
-    50% {
-        transform: translate3d(42px, 52vh, 0) rotate(210deg);
+    8% {
+        opacity: var(--opacity);
+    }
+    34% {
+        transform: translate3d(var(--drift-a), 36vh, 0) rotate(calc(var(--spin) * .42)) scale(var(--scale));
+    }
+    68% {
+        transform: translate3d(var(--drift-b), 74vh, 0) rotate(calc(var(--spin) * .76)) scale(var(--scale));
     }
     100% {
-        transform: translate3d(-26px, 106vh, 0) rotate(420deg);
+        transform: translate3d(calc(var(--drift-a) * -0.7), 108vh, 0) rotate(var(--spin)) scale(var(--scale));
+        opacity: 0;
     }
 }
 
