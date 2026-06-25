@@ -243,46 +243,19 @@ textarea {
 
 .cover-names {
     width: 100%;
-    max-width: 318px;
-    margin: 46px auto 26px;
-    font-family: "Great Vibes", var(--font-script);
-    font-size: clamp(62px, 14vw, 82px);
-    font-weight: 400;
-    line-height: .84;
-    color: rgba(183, 170, 119, .82);
+    max-width: 328px;
+    margin: 42px auto 24px;
+    display: block;
+    line-height: 0;
     text-align: center;
-    letter-spacing: 0;
-    text-shadow: 0 8px 22px rgba(183,170,119,.12);
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
 }
 
-.name-line,
-.amp-line {
+.cover-names img {
     display: block;
     width: 100%;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.amp-line {
-    font-family: var(--font-display);
-    font-size: .5em;
-    letter-spacing: 0;
-    color: rgba(139, 116, 101, .72);
-    line-height: 1.05;
-    transform: none;
-}
-
-.name-line:first-child {
-    letter-spacing: 0;
-    transform: none;
-}
-
-.bride-name {
-    font-size: .96em;
-    letter-spacing: 0;
-    transform: none;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 .cover-date,
@@ -949,9 +922,8 @@ form button:disabled {
     }
 
     .cover-names {
-        max-width: 316px;
-        margin-top: 42px;
-        font-size: clamp(62px, 16.8vw, 78px);
+        max-width: 322px;
+        margin-top: 40px;
     }
 
     .cover-small {
