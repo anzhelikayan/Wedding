@@ -25,6 +25,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -33,6 +34,7 @@ body {
     font-weight: 300;
     color: var(--ink);
     background: var(--page-bg);
+    overflow-x: hidden;
 }
 
 button,
@@ -42,7 +44,8 @@ textarea {
 }
 
 .invitation {
-    max-width: 520px;
+    width: min(100%, 520px);
+    max-width: 100%;
     margin: 0 auto;
     position: relative;
     background: var(--page-bg);
@@ -52,6 +55,7 @@ textarea {
 
 .screen {
     min-height: 100vh;
+    min-height: 100svh;
     padding: 58px 30px;
     display: flex;
     flex-direction: column;
@@ -59,14 +63,14 @@ textarea {
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(46px) scale(0.985);
-    transition: opacity 1.05s ease, transform 1.05s cubic-bezier(.2,.8,.2,1);
+    transform: none;
+    transition: opacity 0.72s ease;
     background: var(--page-bg);
 }
 
 .screen.is-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: none;
 }
 
 .screen::before {
@@ -79,31 +83,30 @@ textarea {
         repeating-linear-gradient(90deg, rgba(183, 170, 119, 0.025) 0 1px, transparent 1px 9px);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(18px) rotate(-1deg);
-    transition: opacity 1.2s ease, transform 1.2s ease;
+    transform: none;
+    transition: opacity 1.2s ease;
     animation: floralSway 7s ease-in-out infinite;
 }
 
 .screen.is-visible::before {
     opacity: 0.72;
-    transform: translateY(0) rotate(0deg);
+    transform: none;
 }
 
 .screen::after {
     content: "";
     position: absolute;
-    inset: 24px 20px;
-    border: 1px solid rgba(183, 170, 119, 0.22);
-    background: url("/images/exact-ornate-frame.png") center / contain no-repeat;
-    opacity: 0.08;
+    inset: 0;
+    border: 0;
+    background: url("/images/exact-ornate-frame.png") center 38px / 88% auto no-repeat;
+    opacity: 0.045;
     pointer-events: none;
-    transform: scale(1.04);
-    transition: transform 1.25s ease, opacity 1.25s ease;
+    transform: none;
+    transition: opacity 1.25s ease;
 }
 
 .screen.is-visible::after {
-    opacity: 0.11;
-    transform: scale(1);
+    opacity: 0.065;
 }
 
 .screen > * {
@@ -112,7 +115,12 @@ textarea {
 }
 
 .section-label {
+    max-width: 100%;
     margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     color: var(--olive);
     font-family: var(--font-body);
     font-size: 14px;
@@ -120,6 +128,7 @@ textarea {
     letter-spacing: 5px;
     text-align: center;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
 }
 
 .section-label::before,
@@ -129,7 +138,8 @@ textarea {
     height: 1px;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 12px;
+    flex: 0 1 44px;
+    margin: 0;
     background: linear-gradient(90deg, transparent, rgba(183, 170, 119, 0.78), transparent);
 }
 
@@ -139,20 +149,24 @@ textarea {
 
 .cover {
     min-height: 100vh;
+    min-height: 100svh;
     display: grid;
-    place-items: center;
-    padding: 14px 8px;
+    place-items: stretch;
+    padding: 0;
     perspective: 1400px;
     background: var(--page-bg);
 }
 
 .cover-card {
-    width: min(99vw, 486px);
-    aspect-ratio: 827 / 1169;
-    min-height: auto;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
+    aspect-ratio: auto;
     border: 0;
-    border-radius: 32px;
-    padding: 102px 78px 108px;
+    border-radius: 0;
+    padding: clamp(74px, 12vh, 118px) clamp(54px, 15vw, 86px) clamp(72px, 11vh, 110px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -219,15 +233,18 @@ textarea {
 
 .cover-names {
     width: 100%;
-    max-width: 270px;
+    max-width: 340px;
     margin: 32px auto 2px;
     font-family: var(--font-script);
-    font-size: clamp(48px, 11vw, 62px);
+    font-size: clamp(50px, 12vw, 70px);
     font-weight: 400;
     line-height: .9;
     color: rgba(47, 59, 43, .82);
     text-align: center;
+    letter-spacing: -0.055em;
     text-shadow: 0 8px 22px rgba(183,170,119,.18);
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
 }
 
 .name-line,
@@ -235,15 +252,23 @@ textarea {
     display: block;
     width: 100%;
     text-align: center;
+    white-space: nowrap;
 }
 
 .amp-line {
     font-family: var(--font-display);
     font-size: .54em;
+    letter-spacing: 0;
+}
+
+.name-line:first-child {
+    letter-spacing: -0.13em;
+    transform: translateX(-0.035em) scaleX(.96);
 }
 
 .bride-name {
     font-size: .92em;
+    letter-spacing: -0.055em;
 }
 
 .cover-date,
@@ -357,6 +382,7 @@ h1 {
 
 .calendar {
     width: min(100%, 430px);
+    max-width: 100%;
     margin: 0 auto;
     padding: 40px 34px 36px;
     background: var(--overlay-bg);
@@ -444,25 +470,28 @@ h1 {
 .timeline {
     display: grid;
     gap: 22px;
+    min-width: 0;
+    width: 100%;
 }
 
 .timeline article {
     display: grid;
-    grid-template-columns: 86px 1fr;
-    gap: 18px;
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 14px;
     align-items: start;
     padding-bottom: 22px;
     border-bottom: 1px solid rgba(183, 170, 119, 0.28);
-    transform: translateX(-16px);
+    transform: translateY(12px);
     opacity: 0;
     transition: transform .9s ease, opacity .9s ease;
     position: relative;
+    min-width: 0;
 }
 
 .timeline article::before {
     content: "";
     position: absolute;
-    left: 74px;
+    left: 64px;
     top: 6px;
     width: 10px;
     height: 10px;
@@ -478,7 +507,7 @@ h1 {
 }
 
 .screen.is-visible .timeline article {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
 }
 
@@ -496,24 +525,28 @@ h1 {
 
 .timeline time {
     color: var(--olive);
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 600;
 }
 
 .timeline h2 {
     margin: 0 0 6px;
     font-family: var(--font-display);
-    font-size: 30px;
+    font-size: clamp(28px, 8vw, 34px);
     font-weight: 500;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
 }
 
 .timeline p {
     margin: 0;
     line-height: 1.58;
+    overflow-wrap: anywhere;
 }
 
 .map-link {
     width: fit-content;
+    max-width: 100%;
     margin-top: 10px;
     display: inline-flex;
     min-height: 36px;
@@ -539,9 +572,9 @@ h1 {
 }
 
 .dress-code img {
-    width: calc(100% + 28px);
-    max-width: none;
-    margin: -18px -14px 0;
+    width: 100%;
+    max-width: 100%;
+    margin: -18px 0 0;
     display: block;
     object-fit: contain;
     border: 0;
@@ -576,8 +609,9 @@ h1 {
 
 .countdown-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
+    min-width: 0;
 }
 
 .countdown-grid div {
@@ -885,7 +919,7 @@ form button:disabled {
 
 @media (max-width: 430px) {
     .screen {
-        padding: 44px 20px;
+        padding: 44px 18px;
     }
 
     .screen::before {
@@ -902,14 +936,14 @@ form button:disabled {
     }
 
     .cover-card {
-        width: min(96vw, 420px);
-        border-radius: 28px;
-        padding: 90px 62px 98px;
+        width: 100vw;
+        border-radius: 0;
+        padding: clamp(78px, 11vh, 104px) 48px clamp(72px, 10vh, 100px);
     }
 
     .cover-names {
-        max-width: 245px;
-        font-size: clamp(43px, 12vw, 56px);
+        max-width: 300px;
+        font-size: clamp(50px, 14vw, 62px);
     }
 
     .cover-small,
@@ -928,11 +962,11 @@ form button:disabled {
     }
 
     .timeline article {
-        grid-template-columns: 74px 1fr;
+        grid-template-columns: 64px minmax(0, 1fr);
     }
 
     .timeline article::before {
-        left: 63px;
+        left: 55px;
     }
 
     .countdown-grid strong {
