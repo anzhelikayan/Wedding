@@ -216,16 +216,16 @@ textarea {
 }
 
 .cover-small {
-    margin-top: 72px;
-    padding: 12px 42px;
-    color: rgba(139, 116, 101, 0.78);
+    margin-top: 78px;
+    padding: 0;
+    color: rgba(139, 116, 101, 0.64);
     font-family: var(--font-display);
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 500;
-    letter-spacing: 10px;
+    letter-spacing: 12px;
     text-transform: uppercase;
-    background: rgba(255, 250, 240, 0.64);
-    box-shadow: 0 10px 30px rgba(183, 170, 119, 0.08);
+    background: transparent;
+    box-shadow: none;
 }
 
 .cover-action {
@@ -240,16 +240,16 @@ textarea {
 
 .cover-names {
     width: 100%;
-    max-width: 390px;
-    margin: 46px auto 22px;
-    font-family: var(--font-script);
-    font-size: clamp(67px, 16vw, 94px);
+    max-width: 300px;
+    margin: 46px auto 26px;
+    font-family: "Monotype Corsiva", "Segoe Script", var(--font-script);
+    font-size: clamp(58px, 13.5vw, 76px);
     font-weight: 400;
-    line-height: .82;
-    color: rgba(183, 170, 119, .86);
+    line-height: .88;
+    color: rgba(183, 170, 119, .82);
     text-align: center;
-    letter-spacing: -0.02em;
-    text-shadow: 0 8px 22px rgba(183,170,119,.18);
+    letter-spacing: -0.035em;
+    text-shadow: 0 8px 22px rgba(183,170,119,.12);
     font-kerning: normal;
     text-rendering: optimizeLegibility;
 }
@@ -264,20 +264,21 @@ textarea {
 
 .amp-line {
     font-family: var(--font-display);
-    font-size: .46em;
+    font-size: .5em;
     letter-spacing: 0;
     color: rgba(139, 116, 101, .72);
     line-height: 1.05;
 }
 
 .name-line:first-child {
-    letter-spacing: -0.055em;
-    transform: translateX(-0.02em) scaleX(.98);
+    letter-spacing: -0.075em;
+    transform: translateX(-0.02em) scaleX(.94);
 }
 
 .bride-name {
-    font-size: .94em;
-    letter-spacing: -0.035em;
+    font-size: .9em;
+    letter-spacing: -0.07em;
+    transform: scaleX(.9);
 }
 
 .cover-date,
@@ -943,16 +944,16 @@ form button:disabled {
     }
 
     .cover-names {
-        max-width: 330px;
+        max-width: 292px;
         margin-top: 42px;
-        font-size: clamp(65px, 18vw, 84px);
+        font-size: clamp(58px, 15.8vw, 72px);
     }
 
     .cover-small {
-        margin-top: 68px;
-        padding: 10px 32px;
-        font-size: 15px;
-        letter-spacing: 8px;
+        margin-top: 72px;
+        padding: 0;
+        font-size: 16px;
+        letter-spacing: 10px;
     }
 
     .cover-action {
