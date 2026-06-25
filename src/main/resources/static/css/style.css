@@ -78,7 +78,7 @@ textarea {
     position: absolute;
     inset: 0;
     background:
-        url("/images/generated-floral-corners.png") center / cover no-repeat,
+        url("/images/generated-floral-corners-transparent.png") center / cover no-repeat,
         linear-gradient(135deg, rgba(255, 255, 255, 0.46), transparent 42%),
         repeating-linear-gradient(90deg, rgba(183, 170, 119, 0.025) 0 1px, transparent 1px 9px);
     opacity: 0;
@@ -567,7 +567,7 @@ h1 {
 
 .dress-code::before {
     background:
-        url("/images/generated-floral-corners.png") center / cover no-repeat,
+        url("/images/generated-floral-corners-transparent.png") center / cover no-repeat,
         linear-gradient(135deg, rgba(255, 255, 255, 0.46), transparent 42%),
         repeating-linear-gradient(90deg, rgba(183, 170, 119, 0.025) 0 1px, transparent 1px 9px);
 }
@@ -919,7 +919,7 @@ form button:disabled {
 
     .screen::before {
         background:
-            url("/images/generated-floral-corners.png") center / cover no-repeat,
+            url("/images/generated-floral-corners-transparent.png") center / cover no-repeat,
             linear-gradient(135deg, rgba(255, 255, 255, 0.46), transparent 42%),
             repeating-linear-gradient(90deg, rgba(183, 170, 119, 0.025) 0 1px, transparent 1px 9px);
     }
