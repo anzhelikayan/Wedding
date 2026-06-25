@@ -81,33 +81,25 @@ textarea {
         url("/images/generated-floral-corners-transparent.png") center / cover no-repeat,
         linear-gradient(135deg, rgba(255, 255, 255, 0.46), transparent 42%),
         repeating-linear-gradient(90deg, rgba(183, 170, 119, 0.025) 0 1px, transparent 1px 9px);
-    opacity: 0;
+    opacity: 0.68;
     pointer-events: none;
     transform: none;
-    transition: opacity 1.2s ease;
+    transition: none;
     animation: none;
 }
 
 .screen.is-visible::before {
-    opacity: 0.72;
+    opacity: 0.68;
     transform: none;
-    animation: floralBreathe 7s ease-in-out infinite;
+    animation: none;
 }
 
 .screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: 0;
-    background: url("/images/exact-ornate-frame.png") center 38px / 88% auto no-repeat;
-    opacity: 0.045;
-    pointer-events: none;
-    transform: none;
-    transition: opacity 1.25s ease;
+    display: none;
 }
 
 .screen.is-visible::after {
-    opacity: 0.065;
+    display: none;
 }
 
 .screen > * {
@@ -889,15 +881,6 @@ form button:disabled {
     }
     70% {
         transform: translate(-50%, -48%) scale(1);
-    }
-}
-
-@keyframes floralBreathe {
-    0%, 100% {
-        opacity: 0.66;
-    }
-    50% {
-        opacity: 0.76;
     }
 }
 
