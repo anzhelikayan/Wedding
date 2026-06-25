@@ -85,12 +85,13 @@ textarea {
     pointer-events: none;
     transform: none;
     transition: opacity 1.2s ease;
-    animation: floralSway 7s ease-in-out infinite;
+    animation: none;
 }
 
 .screen.is-visible::before {
     opacity: 0.72;
     transform: none;
+    animation: floralBreathe 7s ease-in-out infinite;
 }
 
 .screen::after {
@@ -891,18 +892,12 @@ form button:disabled {
     }
 }
 
-@keyframes floralSway {
+@keyframes floralBreathe {
     0%, 100% {
-        background-position:
-            center,
-            0 0,
-            0 0;
+        opacity: 0.66;
     }
     50% {
-        background-position:
-            center 8px,
-            0 0,
-            0 0;
+        opacity: 0.76;
     }
 }
 
