@@ -321,54 +321,52 @@ textarea {
 }
 
 .photo-frame {
-    width: min(100%, 340px);
+    width: min(100%, 360px);
     aspect-ratio: 4 / 5;
     margin: 0 auto 34px;
     display: grid;
     place-items: center;
-    border: 1px solid rgba(183, 170, 119, 0.56);
-    padding: 10px;
+    border: 0;
+    padding: 30px;
     background:
-        linear-gradient(var(--panel-bg), var(--panel-bg)) padding-box,
-        linear-gradient(135deg, rgba(183, 170, 119, 0.72), rgba(255, 250, 240, 0.72), rgba(143, 157, 122, 0.52)) border-box,
-        linear-gradient(rgba(255, 250, 240, 0.36), rgba(255, 250, 240, 0.72)),
-        linear-gradient(135deg, rgba(143, 157, 122, 0.34), rgba(213, 194, 165, 0.42));
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.84), transparent 42%),
+        linear-gradient(145deg, rgba(255, 252, 245, 0.96), rgba(246, 236, 219, 0.92));
     color: rgba(47, 59, 43, 0.62);
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     box-shadow:
-        0 18px 42px rgba(47, 59, 43, 0.1),
-        inset 0 0 0 1px rgba(255, 250, 240, 0.86),
-        inset 0 0 0 7px rgba(183, 170, 119, 0.08);
+        0 24px 58px rgba(47, 59, 43, 0.13),
+        0 0 0 1px rgba(183, 170, 119, 0.18),
+        inset 0 0 0 1px rgba(255, 250, 240, 0.94),
+        inset 0 0 0 12px rgba(183, 170, 119, 0.08);
 }
 
 .photo-frame::before,
 .photo-frame::after {
     content: "";
     position: absolute;
-    z-index: 2;
-    width: 82px;
-    height: 82px;
     pointer-events: none;
-    background: url("/images/ornate-frame.svg") center / contain no-repeat;
-    opacity: 0.42;
-    filter: sepia(0.25) saturate(0.8);
 }
 
 .photo-frame::before {
-    top: 8px;
-    left: 8px;
-    transform: rotate(-2deg);
+    inset: -10px;
+    z-index: 0;
+    background: url("/images/photo-frame-luxury.png?v=20260625-11") center / 100% 100% no-repeat;
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(183, 170, 119, 0.28));
 }
 
 .photo-frame::after {
-    right: 8px;
-    bottom: 8px;
-    transform: rotate(180deg);
+    inset: 30px;
+    z-index: 2;
+    border: 1px solid rgba(183, 170, 119, 0.5);
+    box-shadow:
+        0 0 0 8px rgba(255, 250, 240, 0.42),
+        inset 0 0 0 1px rgba(255, 250, 240, 0.68);
 }
 
 .photo-frame.small {
-    width: min(100%, 300px);
+    width: min(100%, 320px);
     margin-bottom: 28px;
 }
 
@@ -378,7 +376,11 @@ textarea {
     display: block;
     object-fit: cover;
     object-position: center;
-    box-shadow: 0 0 0 1px rgba(183, 170, 119, 0.24);
+    position: relative;
+    z-index: 1;
+    box-shadow:
+        0 0 0 1px rgba(183, 170, 119, 0.38),
+        0 14px 30px rgba(47, 59, 43, 0.12);
 }
 
 h1 {
