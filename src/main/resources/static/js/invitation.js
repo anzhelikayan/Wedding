@@ -123,8 +123,16 @@ animatedScreens.forEach((screen) => {
 });
 
 if (rsvpForm) {
+    let rsvpSubmitted = false;
+
     rsvpForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+
+        if (rsvpSubmitted) {
+            return;
+        }
+
+        rsvpSubmitted = true;
 
         const submitButton = rsvpForm.querySelector('button[type="submit"]');
         const originalText = submitButton?.textContent;
@@ -148,9 +156,10 @@ if (rsvpForm) {
             createCelebrationBurst();
             smoothScrollToElement(document.querySelector("#countdown"), 2200);
         } catch (error) {
+            rsvpSubmitted = false;
             rsvpForm.submit();
         } finally {
-            if (submitButton) {
+            if (submitButton && !rsvpSubmitted) {
                 window.setTimeout(() => {
                     submitButton.disabled = false;
                     submitButton.textContent = originalText;

@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -45,7 +49,7 @@ public class AdminController {
             return "admin-login";
         }
 
-        List<GuestResponse> responses = guestResponseRepository.findAllByOrderByCreatedAtDesc();
+        List<GuestResponse> responses = uniqueLatestResponses();
         model.addAttribute("responses", responses);
         model.addAttribute("total", responses.size());
         model.addAttribute("attending", responses.stream()
@@ -85,7 +89,7 @@ public class AdminController {
         response.getWriter().write('\ufeff');
         response.getWriter().println("Дата;Ім'я;Присутність;Пара;Напої;Алергії;Гаряче;Побажання");
 
-        for (GuestResponse guestResponse : guestResponseRepository.findAllByOrderByCreatedAtDesc()) {
+        for (GuestResponse guestResponse : uniqueLatestResponses()) {
             response.getWriter().println(String.join(";",
                     csv(guestResponse.getCreatedAt() == null ? "" : guestResponse.getCreatedAt().format(DATE_FORMAT)),
                     csv(guestResponse.getFullName()),
@@ -97,6 +101,17 @@ public class AdminController {
                     csv(guestResponse.getWishes())
             ));
         }
+    }
+
+    private List<GuestResponse> uniqueLatestResponses() {
+        Map<String, GuestResponse> responsesByName = new LinkedHashMap<>();
+        for (GuestResponse response : guestResponseRepository.findAllByOrderByCreatedAtDesc()) {
+            String key = response.getFullName() == null || response.getFullName().isBlank()
+                    ? "id:" + response.getId()
+                    : response.getFullName().trim().toLowerCase(Locale.ROOT);
+            responsesByName.putIfAbsent(key, response);
+        }
+        return new ArrayList<>(responsesByName.values());
     }
 
     private boolean isAuthorized(HttpSession session) {

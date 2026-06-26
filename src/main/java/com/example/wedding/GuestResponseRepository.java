@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GuestResponseRepository extends JpaRepository<GuestResponse, Long> {
     List<GuestResponse> findAllByOrderByCreatedAtDesc();
+
+    List<GuestResponse> findByFullNameIgnoreCaseOrderByCreatedAtDesc(String fullName);
 }

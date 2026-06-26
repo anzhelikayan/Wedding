@@ -63,6 +63,30 @@ SPRING_DATASOURCE_PASSWORD=password
 
 Use Railway or Render with PostgreSQL.
 
+## Railway database
+
+Do not rely on the local H2 file database in production. It can disappear after a Railway restart, redeploy, or container move.
+
+On Railway:
+
+1. Add a PostgreSQL service to the project.
+2. Open the Wedding web service.
+3. Go to `Variables`.
+4. Add this variable:
+
+```text
+DATABASE_URL=${{Postgres.DATABASE_URL}}
+```
+
+Keep:
+
+```text
+ADMIN_PASSWORD=your-strong-password
+H2_CONSOLE_ENABLED=false
+```
+
+After redeploy, guest answers will be stored in PostgreSQL and will survive future deploys.
+
 High-level steps:
 
 1. Push this project to GitHub.

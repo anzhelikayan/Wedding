@@ -1,12 +1,14 @@
 package com.example.wedding;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -31,6 +33,7 @@ public class HomeController {
     }
 
     @PostMapping("/rsvp")
+    @Transactional
     public String saveRsvp(
             @RequestParam String fullName,
             @RequestParam String attendance,
@@ -40,16 +43,32 @@ public class HomeController {
             @RequestParam(required = false) String meal,
             @RequestParam(required = false) String wishes
     ) {
-        GuestResponse response = new GuestResponse();
-        response.setFullName(fullName);
-        response.setAttendance(attendance);
-        response.setPartnerName(partnerName);
+        String cleanedFullName = clean(fullName);
+        if (cleanedFullName.isBlank()) {
+            return "redirect:/#rsvp";
+        }
+
+        List<GuestResponse> existingResponses =
+                guestResponseRepository.findByFullNameIgnoreCaseOrderByCreatedAtDesc(cleanedFullName);
+        GuestResponse response = existingResponses.isEmpty() ? new GuestResponse() : existingResponses.get(0);
+        response.setFullName(cleanedFullName);
+        response.setAttendance(clean(attendance));
+        response.setPartnerName(clean(partnerName));
         response.setDrinks(drinks == null ? "" : String.join(", ", drinks));
-        response.setAllergy(allergy);
-        response.setMeal(meal);
-        response.setWishes(wishes);
+        response.setAllergy(clean(allergy));
+        response.setMeal(clean(meal));
+        response.setWishes(clean(wishes));
+        response.setCreatedAt(LocalDateTime.now());
         guestResponseRepository.save(response);
 
+        if (existingResponses.size() > 1) {
+            guestResponseRepository.deleteAll(existingResponses.subList(1, existingResponses.size()));
+        }
+
         return "redirect:/?sent=true#countdown";
+    }
+
+    private String clean(String value) {
+        return value == null ? "" : value.trim();
     }
 }
