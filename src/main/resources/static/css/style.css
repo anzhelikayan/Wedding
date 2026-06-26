@@ -103,6 +103,11 @@ textarea {
     animation: oldFloralsFloat 10s ease-in-out infinite;
 }
 
+.rsvp.is-visible::before,
+body.form-focused .screen::before {
+    animation: none;
+}
+
 .screen.is-visible::after {
     display: none;
 }
@@ -799,6 +804,7 @@ form button:disabled {
     z-index: 9;
     width: min(100vw, 520px);
     height: 100vh;
+    height: 100lvh;
     overflow: hidden;
     pointer-events: none;
     transform: translateX(-50%);
@@ -821,6 +827,11 @@ form button:disabled {
     transform: scale(var(--scale));
     animation: petalFall var(--duration) linear infinite;
     animation-delay: var(--delay);
+}
+
+body.form-focused .petals span {
+    animation-play-state: paused;
+    opacity: 0;
 }
 
 .burst-petal {
@@ -948,6 +959,11 @@ form button:disabled {
 @media (max-width: 430px) {
     .screen {
         padding: 44px 18px;
+    }
+
+    .rsvp {
+        min-height: auto;
+        justify-content: flex-start;
     }
 
     .screen::before {

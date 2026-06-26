@@ -3,6 +3,7 @@ package com.example.wedding;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,7 @@ public class AdminController {
             return "admin-login";
         }
 
-        List<GuestResponse> responses = uniqueLatestResponses();
+        List<GuestResponse> responses = safeUniqueLatestResponses(model);
         model.addAttribute("responses", responses);
         model.addAttribute("total", responses.size());
         model.addAttribute("attending", responses.stream()
@@ -100,6 +101,15 @@ public class AdminController {
                     csv(guestResponse.getMeal()),
                     csv(guestResponse.getWishes())
             ));
+        }
+    }
+
+    private List<GuestResponse> safeUniqueLatestResponses(Model model) {
+        try {
+            return uniqueLatestResponses();
+        } catch (DataAccessException exception) {
+            model.addAttribute("databaseError", true);
+            return List.of();
         }
     }
 

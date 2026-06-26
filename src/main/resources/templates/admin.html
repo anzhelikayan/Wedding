@@ -19,6 +19,10 @@
         </nav>
     </header>
 
+    <section class="error database-error" th:if="${databaseError}">
+        База відповідей тимчасово недоступна. Оновіть сторінку через кілька секунд.
+    </section>
+
     <section class="stats">
         <article>
             <span th:text="${total}">0</span>
@@ -42,7 +46,7 @@
         <article class="response-card" th:each="response : ${responses}">
             <div class="response-title">
                 <h2 th:text="${response.fullName}">Ім'я гостя</h2>
-                <time th:text="${#temporals.format(response.createdAt, 'dd.MM.yyyy HH:mm')}">Дата</time>
+                <time th:text="${response.createdAt == null ? '-' : #temporals.format(response.createdAt, 'dd.MM.yyyy HH:mm')}">Дата</time>
             </div>
             <dl>
                 <div>

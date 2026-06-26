@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.Column;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +22,7 @@ public class GuestResponse {
     private String allergy;
     private String meal;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String wishes;
 
     private LocalDateTime createdAt = LocalDateTime.now();

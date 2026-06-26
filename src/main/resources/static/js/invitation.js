@@ -125,6 +125,18 @@ animatedScreens.forEach((screen) => {
 if (rsvpForm) {
     let rsvpSubmitted = false;
 
+    rsvpForm.addEventListener("focusin", () => {
+        document.body.classList.add("form-focused");
+    });
+
+    rsvpForm.addEventListener("focusout", () => {
+        window.setTimeout(() => {
+            if (!rsvpForm.contains(document.activeElement)) {
+                document.body.classList.remove("form-focused");
+            }
+        }, 80);
+    });
+
     rsvpForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -153,6 +165,8 @@ if (rsvpForm) {
                 formSuccess.hidden = false;
             }
 
+            document.activeElement?.blur();
+            document.body.classList.remove("form-focused");
             createCelebrationBurst();
             smoothScrollToElement(document.querySelector("#countdown"), 2200);
         } catch (error) {
