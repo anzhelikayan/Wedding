@@ -351,7 +351,7 @@ textarea {
 .photo-frame::before {
     inset: -10px;
     z-index: 0;
-    background: url("/images/photo-frame-luxury.png?v=20260625-11") center / 100% 100% no-repeat;
+    background: url("/images/photo-frame-luxury.png?v=20260626-1") center / 100% 100% no-repeat;
     opacity: 1;
     filter: drop-shadow(0 0 12px rgba(183, 170, 119, 0.28));
 }
@@ -607,8 +607,9 @@ h1 {
     display: block;
     object-fit: contain;
     border: 0;
-    border-radius: 0;
+    border-radius: 22px;
     background: transparent;
+    box-shadow: 0 18px 42px rgba(47, 59, 43, 0.08);
 }
 
 .dress-text {
