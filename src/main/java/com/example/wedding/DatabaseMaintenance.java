@@ -36,5 +36,11 @@ public class DatabaseMaintenance implements CommandLineRunner {
         } catch (RuntimeException exception) {
             LOGGER.debug("Skipping guest_response.wishes text migration", exception);
         }
+
+        try {
+            jdbcTemplate.execute("update guest_response set wishes = null where wishes ~ '^[0-9]+$'");
+        } catch (RuntimeException exception) {
+            LOGGER.debug("Skipping stale numeric wishes cleanup", exception);
+        }
     }
 }

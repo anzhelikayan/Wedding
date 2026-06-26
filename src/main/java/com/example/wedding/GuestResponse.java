@@ -80,6 +80,9 @@ public class GuestResponse {
     }
 
     public String getWishes() {
+        if (wishes != null && wishes.matches("\\d+")) {
+            return "";
+        }
         return wishes;
     }
 
